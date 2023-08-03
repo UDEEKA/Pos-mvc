@@ -4,16 +4,26 @@
  */
 package pos.mvc.view;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import pos.mvc.controller.CustomerController;
+import pos.mvc.model.CustomerModel;
+
 /**
  *
  * @author user
  */
 public class CustomerView extends javax.swing.JFrame {
+    
+    private CustomerController customerController;
 
     /**
      * Creates new form CustomerView
      */
     public CustomerView() {
+        customerController = new CustomerController();
         initComponents();
     }
 
@@ -31,7 +41,7 @@ public class CustomerView extends javax.swing.JFrame {
         HedderLabel = new javax.swing.JLabel();
         formPanel = new javax.swing.JPanel();
         custIDLabel = new javax.swing.JLabel();
-        custIDText = new javax.swing.JTextField();
+        custIdText = new javax.swing.JTextField();
         custTittleLabel = new javax.swing.JLabel();
         custDOBText = new javax.swing.JTextField();
         custNameLabel = new javax.swing.JLabel();
@@ -49,6 +59,8 @@ public class CustomerView extends javax.swing.JFrame {
         SaveCustomerButton = new javax.swing.JButton();
         deleteCustomerButton1 = new javax.swing.JButton();
         updateCustomerButton1 = new javax.swing.JButton();
+        custSalaryLabel = new javax.swing.JLabel();
+        custSalaryText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +122,9 @@ public class CustomerView extends javax.swing.JFrame {
             }
         });
 
+        custSalaryLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        custSalaryLabel.setText("Salary");
+
         javax.swing.GroupLayout formPanelLayout = new javax.swing.GroupLayout(formPanel);
         formPanel.setLayout(formPanelLayout);
         formPanelLayout.setHorizontalGroup(
@@ -122,7 +137,7 @@ public class CustomerView extends javax.swing.JFrame {
                             .addGroup(formPanelLayout.createSequentialGroup()
                                 .addComponent(custIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(custIDText, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(custIdText, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(formPanelLayout.createSequentialGroup()
                                 .addComponent(custTittleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -166,7 +181,11 @@ public class CustomerView extends javax.swing.JFrame {
                                     .addGroup(formPanelLayout.createSequentialGroup()
                                         .addComponent(custDOBLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(custDOBText, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(custDOBText, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(26, 26, 26)
+                                        .addComponent(custSalaryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(custSalaryText, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 67, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
@@ -176,7 +195,7 @@ public class CustomerView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(custIDLabel)
-                    .addComponent(custIDText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(custIdText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(custTittleLabel)
@@ -186,7 +205,10 @@ public class CustomerView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(custDOBLabel)
-                    .addComponent(custDOBText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(custDOBText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(custSalaryLabel)
+                        .addComponent(custSalaryText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(custAddressabel)
@@ -243,7 +265,7 @@ public class CustomerView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SaveCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveCustomerButtonActionPerformed
-        // TODO add your handling code here:
+        saveCustomer();
     }//GEN-LAST:event_SaveCustomerButtonActionPerformed
 
     private void updateCustomerButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCustomerButton1ActionPerformed
@@ -263,17 +285,41 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JLabel custDOBLabel;
     private javax.swing.JTextField custDOBText;
     private javax.swing.JLabel custIDLabel;
-    private javax.swing.JTextField custIDText;
+    private javax.swing.JTextField custIdText;
     private javax.swing.JLabel custNameLabel;
     private javax.swing.JTextField custNameText;
     private javax.swing.JLabel custPostalCodeLabel;
     private javax.swing.JTextField custPostalCodeText;
     private javax.swing.JLabel custProvinceLabel;
     private javax.swing.JTextField custProvinceText;
+    private javax.swing.JLabel custSalaryLabel;
+    private javax.swing.JTextField custSalaryText;
     private javax.swing.JTextField custTitleText;
     private javax.swing.JLabel custTittleLabel;
     private javax.swing.JButton deleteCustomerButton1;
     private javax.swing.JPanel formPanel;
     private javax.swing.JButton updateCustomerButton1;
     // End of variables declaration//GEN-END:variables
+
+private void saveCustomer(){
+    CustomerModel customer = new CustomerModel(
+            custIdText.getText(),
+            custTitleText.getText(),
+            custNameText.getText(),
+            custDOBText.getText(),
+            Double.parseDouble(custSalaryText.getText()),
+            custAddressText.getText(),
+            custCityText.getText(),
+            custProvinceText.getText(),
+            custPostalCodeText.getText());
+  
+        try {
+            String resp = customerController.saveCustomer(customer);
+            JOptionPane.showMessageDialog(this, resp);
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+   
+    }
 }
