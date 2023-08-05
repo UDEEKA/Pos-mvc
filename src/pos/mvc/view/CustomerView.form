@@ -50,7 +50,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="HeaderPanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="formPanel" min="-2" pref="734" max="-2" attributes="0"/>
+                  <Component id="formPanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -136,9 +136,9 @@
                                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="102" attributes="0">
-                                                      <Component id="deleteCustomerButton1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="deleteCustomerButton" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="updateCustomerButton1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="updateCustomerButton" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                                       <Component id="SaveCustomerButton" min="-2" max="-2" attributes="0"/>
                                                   </Group>
@@ -150,9 +150,9 @@
                                               </Group>
                                           </Group>
                                           <Group type="102" attributes="0">
-                                              <Component id="custDOBLabel" min="-2" pref="103" max="-2" attributes="0"/>
+                                              <Component id="custDobLabel" min="-2" pref="103" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="custDOBText" min="-2" pref="160" max="-2" attributes="0"/>
+                                              <Component id="custDobText" min="-2" pref="160" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                               <Component id="custSalaryLabel" min="-2" pref="103" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -191,8 +191,8 @@
                               <Component id="custSalaryText" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="custDOBLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="custDOBText" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="custDobLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="custDobText" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
@@ -213,8 +213,8 @@
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="SaveCustomerButton" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="deleteCustomerButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="updateCustomerButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="deleteCustomerButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="updateCustomerButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                           </Group>
@@ -227,7 +227,7 @@
                           </Group>
                       </Group>
                       <Component id="tablePanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="87" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -251,7 +251,10 @@
                 <Property name="text" type="java.lang.String" value="Customer Title"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="custDOBText">
+            <Component class="javax.swing.JTextField" name="custDobText">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="custDobTextActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="custNameLabel">
               <Properties>
@@ -263,7 +266,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="custNameText">
             </Component>
-            <Component class="javax.swing.JLabel" name="custDOBLabel">
+            <Component class="javax.swing.JLabel" name="custDobLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
@@ -324,7 +327,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveCustomerButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="deleteCustomerButton1">
+            <Component class="javax.swing.JButton" name="deleteCustomerButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
@@ -332,7 +335,7 @@
                 <Property name="text" type="java.lang.String" value="Delete Customer"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="updateCustomerButton1">
+            <Component class="javax.swing.JButton" name="updateCustomerButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
@@ -340,7 +343,7 @@
                 <Property name="text" type="java.lang.String" value="Update Customer"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateCustomerButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateCustomerButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="custSalaryLabel">
@@ -358,16 +361,16 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="353" max="-2" attributes="0"/>
-                          <EmptySpace pref="275" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jScrollPane1" alignment="1" pref="267" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -390,6 +393,9 @@
                           </Table>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="customerTableMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

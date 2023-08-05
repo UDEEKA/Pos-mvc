@@ -9,7 +9,7 @@ package pos.mvc.model;
  * @author user
  */
 public class CustomerModel {
-    private String custID;
+    private String custId;
     private String title;
     private String name;
     private String dob;
@@ -19,8 +19,8 @@ public class CustomerModel {
     private String province;
     private String zip;
 
-    public CustomerModel(String custID, String title, String name, String dob, Double salary, String address, String city, String province, String zip) {
-        this.custID = custID;
+    public CustomerModel(String custId, String title, String name, String dob, Double salary, String address, String city, String province, String zip) {
+        this.custId = custId;
         this.title = title;
         this.name = name;
         this.dob = dob;
@@ -38,14 +38,14 @@ public class CustomerModel {
      * @return the custID
      */
     public String getCustID() {
-        return custID;
+        return custId;
     }
 
     /**
      * @param custID the custID to set
      */
-    public void setCustID(String custID) {
-        this.custID = custID;
+    public void setCustID(String custId) {
+        this.custId = custId;
     }
 
     /**
@@ -162,7 +162,11 @@ public class CustomerModel {
 
     @Override
     public String toString() {
-        return "CustomerModel{" + "custID=" + custID + ", title=" + title + ", name=" + name + ", dob=" + dob + ", salary=" + salary + ", address=" + address + ", city=" + city + ", province=" + province + ", zip=" + zip + '}';
+        return "CustomerModel{" + "custId=" + custId + ", title=" + title + ", name=" + name + ", dob=" + dob + ", salary=" + salary + ", address=" + address + ", city=" + city + ", province=" + province + ", zip=" + zip + '}';
+    }
+
+    public String getCustId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     
