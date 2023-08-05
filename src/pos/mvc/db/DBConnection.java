@@ -9,10 +9,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author user
+ * @author anjanathrishakya
  */
 public class DBConnection {
     
@@ -20,14 +21,13 @@ public class DBConnection {
     private Connection connection;
     
     private DBConnection(){
-        
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/SuperMarket", "root", "1234");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Supermarket", "root", "1234");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
-   
     }
     
     public static DBConnection getInstance(){
@@ -40,4 +40,5 @@ public class DBConnection {
     public Connection getConnection(){
         return connection;
     }
+    
 }
