@@ -18,7 +18,7 @@ import pos.mvc.model.CustomerModel;
  * @author user
  */
 public class CustomerView extends javax.swing.JFrame {
-    
+
     private CustomerController customerController;
 
     /**
@@ -125,6 +125,11 @@ public class CustomerView extends javax.swing.JFrame {
 
         deleteCustomerButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         deleteCustomerButton.setText("Delete Customer");
+        deleteCustomerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteCustomerButtonActionPerformed(evt);
+            }
+        });
 
         updateCustomerButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         updateCustomerButton.setText("Update Customer");
@@ -324,14 +329,18 @@ public class CustomerView extends javax.swing.JFrame {
     }//GEN-LAST:event_updateCustomerButtonActionPerformed
 
     private void customerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerTableMouseClicked
-         searchCustomer();
+        searchCustomer();
     }//GEN-LAST:event_customerTableMouseClicked
 
     private void custDobTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custDobTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_custDobTextActionPerformed
 
-    
+    private void deleteCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCustomerButtonActionPerformed
+        deleteCustomer();
+    }//GEN-LAST:event_deleteCustomerButtonActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BasePanel;
     private javax.swing.JPanel HeaderPanel;
@@ -363,18 +372,18 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JButton updateCustomerButton;
     // End of variables declaration//GEN-END:variables
 
-private void saveCustomer(){
-    CustomerModel customer = new CustomerModel(
-            custIdText.getText(),
-            custTitleText.getText(),
-            custNameText.getText(),
-            custDobText.getText(),
-            Double.parseDouble(custSalaryText.getText()),
-            custAddressText.getText(),
-            custCityText.getText(),
-            custProvinceText.getText(),
-            custPostalCodeText.getText());
-  
+    private void saveCustomer() {
+        CustomerModel customer = new CustomerModel(
+                custIdText.getText(),
+                custTitleText.getText(),
+                custNameText.getText(),
+                custDobText.getText(),
+                Double.parseDouble(custSalaryText.getText()),
+                custAddressText.getText(),
+                custCityText.getText(),
+                custProvinceText.getText(),
+                custPostalCodeText.getText());
+
         try {
             String resp = customerController.saveCustomer(customer);
             JOptionPane.showMessageDialog(this, resp);
@@ -382,55 +391,57 @@ private void saveCustomer(){
             loadAllCustomers();
         } catch (SQLException ex) {
             Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
-             JOptionPane.showMessageDialog(this, ex.getMessage());
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-           
+
     }
-        private void clear(){
-            custIdText.setText("");
-            custTitleText.setText("");
-            custNameText.setText("");
-            custDobText.setText("");
-            custSalaryText.setText("");
-            custAddressText.setText("");
-            custCityText.setText("");
-            custProvinceText.setText("");
-            custPostalCodeText.setText("");
-              
-        }
-        private void loadAllCustomers(){
-            
+
+    private void clear() {
+        custIdText.setText("");
+        custTitleText.setText("");
+        custNameText.setText("");
+        custDobText.setText("");
+        custSalaryText.setText("");
+        custAddressText.setText("");
+        custCityText.setText("");
+        custProvinceText.setText("");
+        custPostalCodeText.setText("");
+
+    }
+
+    private void loadAllCustomers() {
+
         try {
-            String[] columns = {"Id", "Name", "Address" , "Salary", "Postal Code"};
-            DefaultTableModel dtm = new DefaultTableModel(columns, 0){
-                
+            String[] columns = {"Id", "Name", "Address", "Salary", "Postal Code"};
+            DefaultTableModel dtm = new DefaultTableModel(columns, 0) {
+
                 @Override
-                public  boolean isCellEditable(int row, int column ){
+                public boolean isCellEditable(int row, int column) {
                     return false;
                 }
             };
-            
+
             customerTable.setModel(dtm);
-            
-            ArrayList <CustomerModel> customers = customerController.getAllCustomers();
-            
-            for (CustomerModel customer : customers){
-                Object[] rowData = {customer.getCustID(), customer.getTitle() + " " + customer.getName(), customer.getAddress()+" " +customer.getCity(), customer.getSalary(), customer.getZip()};
+
+            ArrayList<CustomerModel> customers = customerController.getAllCustomers();
+
+            for (CustomerModel customer : customers) {
+                Object[] rowData = {customer.getCustID(), customer.getTitle() + " " + customer.getName(), customer.getAddress() + " " + customer.getCity(), customer.getSalary(), customer.getZip()};
                 dtm.addRow(rowData);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage());
-        } 
-        
+        }
+
     }
-        
-     private void searchCustomer(){
+
+    private void searchCustomer() {
         try {
             String custId = customerTable.getValueAt(customerTable.getSelectedRow(), 0).toString();
             CustomerModel customerModel = customerController.getCustomer(custId);
-            
-            if (customerModel != null){
+
+            if (customerModel != null) {
                 custIdText.setText(customerModel.getCustId());
                 custTitleText.setText(customerModel.getTitle());
                 custNameText.setText(customerModel.getName());
@@ -440,17 +451,17 @@ private void saveCustomer(){
                 custCityText.setText(customerModel.getCity());
                 custProvinceText.setText(customerModel.getProvince());
                 custPostalCodeText.setText(customerModel.getZip());
-            } else{
-                 JOptionPane.showMessageDialog(this, "Customer Not FOund");
+            } else {
+                JOptionPane.showMessageDialog(this, "Customer Not FOund");
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-     }
-     
-      public void updateCustomer() {
+    }
+
+    public void updateCustomer() {
         try {
             CustomerModel customer = new CustomerModel(
                     custIdText.getText(),
@@ -469,7 +480,21 @@ private void saveCustomer(){
             loadAllCustomers();
         } catch (SQLException ex) {
             Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
-            
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
+    }
+
+    private void deleteCustomer() {
+        try {
+            String custId = custIdText.getText();
+            String resp = customerController.deleteCustomer(custId);
+            JOptionPane.showMessageDialog(this, resp);
+            clear();
+            loadAllCustomers();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+
     }
 }
