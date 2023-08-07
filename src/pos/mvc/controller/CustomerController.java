@@ -30,7 +30,7 @@ public class CustomerController {
     public String saveCustomer(CustomerModel customer)throws SQLException{
         Connection connection = DBConnection.getInstance().getConnection();
         
-        String query = " INSERT INTO CUSTOMER VALUEs(?,?,?,?,?,?,?,?,?)";
+        String query = " INSERT INTO CUSTOMER VALUES(?,?,?,?,?,?,?,?,?)";
         
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, customer.getCustId());    
