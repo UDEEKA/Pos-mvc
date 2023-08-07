@@ -426,7 +426,7 @@ public class CustomerView extends javax.swing.JFrame {
             ArrayList<CustomerModel> customers = customerController.getAllCustomers();
 
             for (CustomerModel customer : customers) {
-                Object[] rowData = {customer.getCustID(), customer.getTitle() + " " + customer.getName(), customer.getAddress() + " " + customer.getCity(), customer.getSalary(), customer.getZip()};
+                Object[] rowData = {customer.getCustId(), customer.getTitle() + " " + customer.getName(), customer.getAddress() + " " + customer.getCity(), customer.getSalary(), customer.getZip()};
                 dtm.addRow(rowData);
             }
         } catch (SQLException ex) {

@@ -37,7 +37,7 @@ public class CustomerModel {
     /**
      * @return the custID
      */
-    public String getCustID() {
+    public String getCustId() {
         return custId;
     }
 
@@ -165,9 +165,7 @@ public class CustomerModel {
         return "CustomerModel{" + "custId=" + custId + ", title=" + title + ", name=" + name + ", dob=" + dob + ", salary=" + salary + ", address=" + address + ", city=" + city + ", province=" + province + ", zip=" + zip + '}';
     }
 
-    public String getCustId() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+      
     
     
 }

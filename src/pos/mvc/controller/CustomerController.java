@@ -44,7 +44,7 @@ public class CustomerController {
         preparedStatement.setString(9, customer.getZip());     
         
         if (preparedStatement.executeUpdate() > 0){
-            return "Sucess";
+            return "Sucessfully Save";
         } else {
             return "Fail";
         }
@@ -118,7 +118,7 @@ public class CustomerController {
         preparedStatement.setString(9, customerModel.getCustId());
 
         if (preparedStatement.executeUpdate() > 0) {
-            return "Success";
+            return "Sucessfully updated";
         } else {
             return "Fail";
         }
@@ -132,7 +132,7 @@ public class CustomerController {
         statement.setString(1, custId);
         
         if (statement.executeUpdate() > 0) {
-            return "Success";
+            return "Sucessfully Deleted";
         } else {
             return "Fail";
         }
