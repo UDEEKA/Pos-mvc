@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import pos.mvc.db.DBConnection;
+import pos.mvc.model.CustomerModel;
 import pos.mvc.model.ItemModel;
 
 /**
@@ -52,7 +53,7 @@ public class ItemController {
         preparedStatement.setInt(5, item.getQoh());
 
         if (preparedStatement.executeUpdate() > 0) {
-            return "Sucess";
+            return "Sucessfully Save";
         } else {
             return "Fail";
         }
@@ -78,6 +79,39 @@ public class ItemController {
           return item;
       }
       return null;
+    }
+    
+    public String updateItem(ItemModel item) throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+
+       String query = "UPDATE Item SET Description=?, PackSize=?, UnitPrice=?, QtyOnHand=? WHERE ItemCode=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(5, item.getItemCode());
+        preparedStatement.setString(1, item.getDescription());
+        preparedStatement.setString(2, item.getPackSize());
+         preparedStatement.setDouble(3, item.getUnitPrice());
+        preparedStatement.setInt(4, item.getQoh());
+
+        if (preparedStatement.executeUpdate() > 0) {
+            return "Successfully Updated";
+        } else {
+            return "Fail";
+        }
+
+    }
+    
+    public String deleteCustomer(String itemCode) throws SQLException{
+        Connection connection = DBConnection.getInstance().getConnection();
+        String query = " DELETE FROM Item WHERE ItemCode = ?";  
+        PreparedStatement statement = connection.prepareCall(query);
+        statement.setString(1, itemCode);
+        
+        if (statement.executeUpdate() > 0) {
+            return "Successfully Deleted";
+        } else {
+            return "Fail";
+        }
+        
     }
 
 }
